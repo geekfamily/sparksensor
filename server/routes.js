@@ -5,11 +5,15 @@
 'use strict';
 
 var errors = require('./components/errors');
+var services = require('./api/sparkcore/index');
 
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
+
+  //services
+  app.get('/api/sparkcore/devices', services.spark.devices);
+  app.post('/api/sparkcore/function', services.spark.runFunction);
   
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

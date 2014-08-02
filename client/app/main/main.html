@@ -7,9 +7,20 @@
 </header>
 <BR>
 <div class="container">
+
   <div class="row">
     <div class="col-lg-12">
-      Light <span ng-click="lightOn()">On</span>/<span ng-click="lightOff()">Off</span>
+      <ul>
+        <li ng-repeat="device in devices">
+          {{device.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      LED: Turn <button ng-click="lightOn()" ng-hide="ledOn">On</button><button ng-click="lightOff()" ng-show="ledOn">Off</button>
     </div>
   </div>
 </div>

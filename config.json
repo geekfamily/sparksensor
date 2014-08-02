@@ -1,0 +1,6 @@
+{
+  "serviceUrl": "https://api.spark.io/v1",
+  "accessToken": "672133bcdfd4b7437c141a89f0095bf19abea821",
+  "deviceId": "53ff73065075535153191587",
+  "requestTimeout": 30000
+}
