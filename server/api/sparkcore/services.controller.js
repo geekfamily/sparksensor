@@ -10,6 +10,10 @@ exports.getDevices = function (options, done) {
   return makeRequest(_.merge({}, options, {path: '/devices?access_token='+conf.get('accessToken')}), done);
 }
 
+exports.callFunction = function (options, done) {
+  return makeRequest(_.merge({}, options, {path: '/devices/'+conf.get('deviceId')+'/'+options.functionName+'?access_token='+conf.get('accessToken')}), done);
+}
+
 exports.runFunction = function (options, done) {
   return makeRequest(_.merge({}, options, {path: '/devices/'+conf.get('deviceId')+'/'+options.functionName, cmd:{pin: options.pin, value:options.value}, method: 'POST'}), done);
 }
@@ -36,7 +40,7 @@ function performRequest(options) {
   var url = conf.get('serviceUrl') + options.path;
   var accessToken = conf.get('accessToken');
   var headers = {};
-  var body = {};
+  var body;
 
   // All requests to the API should have an accessToken
 //  headers = {"access_token="+=accessToken};

@@ -12,6 +12,21 @@ var spark = {
       var err = {};
       var status;
       var statusCode = status || 200;
+//      ServiceResponse({result: devices}).send(res);
+      if (result && result.length>0){
+        for (var i=0;i<result.length;i++){
+          result[i].id=null;
+        }
+      }
+      res.type('application/json').send(statusCode, {metadata: {}, result:result});
+    });
+  },
+
+  callFunction: function (req, res) {
+    controller.callFunction({functionName:req.query.functionName, pin:req.query.pin,value:req.query.value}, function(result){
+      var err = {};
+      var status;
+      var statusCode = status || 200;
 //      ServiceResponse({result: devices}).send(res);;
       res.type('application/json').send(statusCode, {metadata: {}, result:result});
     });
