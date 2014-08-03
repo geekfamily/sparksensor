@@ -5,7 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
-var services = require('./api/sparkcore/index');
+var services = require('./api/sparkcore/spark');
 
 module.exports = function(app) {
 

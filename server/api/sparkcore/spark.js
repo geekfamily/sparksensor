@@ -8,22 +8,22 @@ var controller = require('./services.controller.js');
 var spark = {
 
   devices: function (req, res) {
-    controller.getDevices({}, function(devices){
+    controller.getDevices({}, function(result){
       var err = {};
       var status;
       var statusCode = status || 200;
 //      ServiceResponse({result: devices}).send(res);;
-      res.type('application/json').send(statusCode, {metadata: {}, result:devices});
+      res.type('application/json').send(statusCode, {metadata: {}, result:result});
     });
   },
 
   runFunction: function (req, res) {
-    controller.runFunction({functionName:req.query.functionName, pin:req.query.pin,value:req.query.value}, function(devices){
+    controller.runFunction({functionName:req.query.functionName, pin:req.query.pin,value:req.query.value}, function(result){
       var err = {};
       var status;
       var statusCode = status || 200;
 //      ServiceResponse({result: devices}).send(res);;
-      res.type('application/json').send(statusCode, {metadata: {}, result:devices});
+      res.type('application/json').send(statusCode, {metadata: {}, result:result});
     });
   }
 
