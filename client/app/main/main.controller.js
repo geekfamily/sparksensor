@@ -11,7 +11,7 @@ angular.module('sparksensorApp')
     $resource('/api/sparkcore/function',{functionName:'temperature'}).get().$promise.then(tempSuccess, tempFail);
 
     function success(res){
-      $scope.devices = res.result.result || res;
+      $scope.devices = res.result || res;
     };
 
     function fail(res){
@@ -35,7 +35,9 @@ angular.module('sparksensorApp')
     };
 
     function tempSuccess(res){
-      $scope.temp = res.result || res;
+      var voltage = res.result.result || res;
+      voltage = (voltage * 3.3)/4095;
+      $scope.temp = (voltage - 0.5) * 100;
     };
 
     function tempFail(res){
