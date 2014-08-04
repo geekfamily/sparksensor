@@ -13,6 +13,7 @@ module.exports = function(app) {
 
   //services
   app.get('/api/sparkcore/devices', services.spark.devices);
+  app.get('/api/sparkcore/function', services.spark.callFunction);
   app.post('/api/sparkcore/function', services.spark.runFunction);
   
   // All undefined asset or api routes should return a 404
