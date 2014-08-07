@@ -5,10 +5,13 @@ angular.module('sparksensorApp')
 
     $scope.devices = [];
     $scope.ledOn = false;
+    $scope.move = false;
 
     $resource('/api/sparkcore/devices').get().$promise.then(success, fail);
 
     $resource('/api/sparkcore/function',{functionName:'temperature'}).get().$promise.then(tempSuccess, tempFail);
+
+    $resource('/api/sparkcore/function',{functionName:'motion'}).get().$promise.then(moveSuccess, moveFail);
 
     function success(res){
       $scope.devices = res.result || res;
@@ -44,4 +47,14 @@ angular.module('sparksensorApp')
     function tempFail(res){
 
     };
+
+    function moveSuccess(res){
+      var motion = res.result.result || res;
+      $scope.motion = motion===1?"YES":"NO";
+    };
+
+    function moveFail(res){
+
+    };
+
   });
