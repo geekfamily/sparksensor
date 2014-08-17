@@ -11,7 +11,7 @@ angular.module('sparksensorApp')
 
     $resource('/api/sparkcore/function',{functionName:'temperature'}).get().$promise.then(tempSuccess, tempFail);
 
-    $resource('/api/sparkcore/function',{functionName:'motion'}).get().$promise.then(moveSuccess, moveFail);
+    $resource('/api/sparkcore/event',{eventName:'motion'}).get().$promise.then(moveSuccess, moveFail);
 
     function success(res){
       $scope.devices = res.result || res;

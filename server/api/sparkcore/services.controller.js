@@ -14,6 +14,10 @@ exports.callFunction = function (options, done) {
   return makeRequest(_.merge({}, options, {path: '/devices/'+conf.get('deviceId')+'/'+options.functionName+'?access_token='+conf.get('accessToken')}), done);
 }
 
+exports.eventListen = function (options, done) {
+  return makeRequest(_.merge({}, options, {path: '/devices/'+conf.get('deviceId')+'/events/'+options.eventName+'?access_token='+conf.get('accessToken')}), done);
+}
+
 exports.runFunction = function (options, done) {
   return makeRequest(_.merge({}, options, {path: '/devices/'+conf.get('deviceId')+'/'+options.functionName, cmd:{pin: options.pin, value:options.value}, method: 'POST'}), done);
 }
@@ -43,7 +47,6 @@ function performRequest(options) {
   var body;
 
   // All requests to the API should have an accessToken
-//  headers = {"access_token="+=accessToken};
 
   if (options.method && options.method=="POST"){
     headers = {'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'};

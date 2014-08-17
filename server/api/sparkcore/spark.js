@@ -40,6 +40,16 @@ var spark = {
 //      ServiceResponse({result: devices}).send(res);;
       res.type('application/json').send(statusCode, {metadata: {}, result:result});
     });
+  },
+
+  eventListen: function (req, res) {
+    controller.eventListen({eventName:req.query.eventName, pin:req.query.pin,value:req.query.value}, function(result){
+      var err = {};
+      var status;
+      var statusCode = status || 200;
+//      ServiceResponse({result: devices}).send(res);;
+      res.type('application/json').send(statusCode, {metadata: {}, result:result});
+    });
   }
 
 };
