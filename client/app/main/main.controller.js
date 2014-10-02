@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('sparksensorApp')
-  .controller('MainCtrl', function ($scope, $http, $resource) {
+  angular.module('sparksensorApp')
+    .controller('MainCtrl', function ($scope, $rootScope, $http, $resource) {
 
     $scope.devices = [];
     $scope.ledOn = false;
@@ -11,7 +11,7 @@ angular.module('sparksensorApp')
 
     $resource('/api/sparkcore/function',{functionName:'temperature'}).get().$promise.then(tempSuccess, tempFail);
 
-    $resource('/api/sparkcore/event',{eventName:'motion'}).get().$promise.then(moveSuccess, moveFail);
+    $resource('/api/sparkcore/event',{eventName:'sparksensor'}).get().$promise.then(moveSuccess, moveFail);
 
     function success(res){
       $scope.devices = res.result || res;
@@ -54,7 +54,11 @@ angular.module('sparksensorApp')
     };
 
     function moveFail(res){
-
+      $scope.motion = "YES";
     };
+
+//    socket.on('send:motionstart', function () {
+//
+//    });
 
   });

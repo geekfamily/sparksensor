@@ -17,7 +17,6 @@ var config = require('./environment');
 
 module.exports = function(app) {
   var env = app.get('env');
-
   app.set('views', config.root + '/server/views');
   app.engine('html', require('ejs').renderFile);
   app.set('view engine', 'html');
