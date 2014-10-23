@@ -1,7 +1,8 @@
 'use strict';
 
-var express = require('express');
 var controller = require('./services.controller.js');
+var server = require('../../app');
+var socket = require('./../../services/socketsvc');
 
 var spark = {
 
@@ -45,12 +46,22 @@ var spark = {
   },
 
   eventListen: function (req, res) {
-    controller.eventListen({eventName:req.query.eventName, pin:req.query.pin,value:req.query.value}, function(result){
-      var err = {};
-      var status;
-      var statusCode = status || 200;
-//      ServiceResponse({result: devices}).send(res);;
-//      res.type('application/json').send(statusCode, {metadata: {}, result:result});
+    controller.eventListen({eventName:req.query.eventName}, function(err, data){
+      if (err){
+        res.type('application/json').send(statusCode, {metadata: {}, result:err});
+      } else {
+        var status;
+        var statusCode = status || 200;
+
+        try {
+          data = data.substring(data.indexOf("{"));
+          var parsedData = JSON.parse(data).data;
+          socket.emit('motion_event', parsedData);
+        } catch (e) {
+          console.log("not JSON");
+        }
+      }
+
     });
   }
 

@@ -6,8 +6,6 @@ var request = require('request'),
   extend = require('extend'),
   conf = require('../../config/serverconfig'),
   EventSource = require('eventsource'),
-//  socket  = require('./services/socket');
-  socket  = require('./../../services/socket.js'),
   spark = require('spark');
 
 function login(){
@@ -58,8 +56,19 @@ exports.runFunction = function (options, done) {
   );
 }
 
-exports.eventListen = function ($rootScope, options, done) {
-  var url = conf.get('serviceUrl') + '/devices/'+conf.get('deviceId')+'/events/?access_token='+conf.get('accessToken');
+exports.eventListen = function (options, done) {
+//  var url = conf.get('serviceUrl') + '/devices/'+conf.get('deviceId')+'/events/?access_token='+conf.get('accessToken');
+
+  login().then(
+    function(token){
+      spark.getEventStream(options.eventName, conf.get('deviceId'), function(data) {
+          return done("",data);
+      });
+    }
+  );
+
+
+
 //  var es = new EventSource(url);
 //  console.log("Listening on:"+url);
 //  es.addEventListener(options.eventName, function(e){
