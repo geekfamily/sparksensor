@@ -14,7 +14,7 @@ var config = require('./config/environment');
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var socket = require('./services/socketsvc');
+var socket = require('./services/socketservice');
 
 require('./config/express')(app);
 require('./routes')(app);

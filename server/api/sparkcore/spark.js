@@ -2,7 +2,7 @@
 
 var controller = require('./services.controller.js');
 var server = require('../../app');
-var socket = require('./../../services/socketsvc');
+var socket = require('./../../services/socketservice');
 
 var spark = {
 
