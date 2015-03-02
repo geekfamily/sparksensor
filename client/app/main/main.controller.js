@@ -40,9 +40,9 @@
 
     function tempSuccess(res){
       var voltage = res.result.result || res;
-      voltage = (voltage * 3.3)/1024;
+      voltage = (voltage * 3.3)/4095;
       $scope.tempC = (voltage - 0.5) * 100;
-      $scope.tempF = ($scope.tempC * 9.0 / 5.0) + 32.0;
+      $scope.tempF = ($scope.tempC * (9.0 / 5.0)) + 32.0;
     };
 
     function tempFail(res){
